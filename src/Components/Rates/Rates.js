@@ -9,7 +9,7 @@ class Rates extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'http://localhost:3001',
+            url: 'https://sahran-rapidremit.herokuapp.com/',
             formModal: false,
             formModal2: false,
             rates: [],
@@ -29,7 +29,7 @@ class Rates extends Component {
     }
 
     getRates = async () => {
-        const request = await axios.get(`${this.state.url}/rate/view`);
+        const request = await axios.get(`${this.state.url}rate/view`);
         if (request.data.rates) {
             this.setState({
                 rates: request.data.rates
@@ -38,7 +38,7 @@ class Rates extends Component {
     }
 
     getPartners = async () => {
-        const request = await axios.get(`${this.state.url}/partner/get/partners`);
+        const request = await axios.get(`${this.state.url}partner/get/partners`);
         if (request.data.partners) {
             this.setState({
                 partners: request.data.partners
@@ -72,7 +72,7 @@ class Rates extends Component {
 
     saveRate = async (Rate) => {
 
-        const request = await axios.post(`${this.state.url}/rate/add`, Rate);
+        const request = await axios.post(`${this.state.url}rate/add`, Rate);
         if (!request.data) {
             this.openSnackbar('error', `This Provider already had set the rates for the country ${Rate.Country}`, true);
             return false;
@@ -109,7 +109,7 @@ class Rates extends Component {
 
     deleteRate = async()=>{
         const {url, selectedRate, rates} = this.state;
-        const request = await axios.delete(`${url}/rate/delete/${selectedRate._id}`);
+        const request = await axios.delete(`${url}rate/delete/${selectedRate._id}`);
         if (request.data) {
             let updatedRates = await rates.filter(e => e._id !== selectedRate._id)
             this.setState({
@@ -124,7 +124,7 @@ class Rates extends Component {
     updateRate = async (Rate) => {
     
         const { rates, url, selectedRate, partners } = this.state;
-        const request = await axios.put(`${url}/rate/update/${Rate._id}`, Rate);
+        const request = await axios.put(`${url}rate/update/${Rate._id}`, Rate);
         if (!request.data) {
             this.openSnackbar('error',  `This Provider already had set the rates for the country ${Rate.Country}`, true);
             return false;

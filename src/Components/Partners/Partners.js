@@ -9,7 +9,7 @@ class Partners extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'http://localhost:3001',
+            url: 'https://sahran-rapidremit.herokuapp.com/',
             showList: true,
             showPassword: false,
             showConfirmPassword: false,

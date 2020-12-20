@@ -10,7 +10,7 @@ class Users extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'http://localhost:3001',
+            url: 'https://sahran-rapidremit.herokuapp.com/',
             showList: true,
             showPassword: false,
             showConfirmPassword: false,
@@ -32,7 +32,7 @@ class Users extends Component {
 
     getUsers = async () => {
 
-        const request = await axios.get(`${this.state.url}/user/view?limit=10&skip=0`);
+        const request = await axios.get(`${this.state.url}user/view?limit=10&skip=0`);
         if (request.data.users) {
             this.setState({
                 users: request.data.users
@@ -75,7 +75,7 @@ class Users extends Component {
 
     saveUser = async (User) => {
 
-        const request = await axios.post(`${this.state.url}/user/add`, User);
+        const request = await axios.post(`${this.state.url}user/add`, User);
         if (!request.data) {
             this.openSnackbar('error', 'This Email Address already exists!', true, false);
             return false;
@@ -144,7 +144,7 @@ class Users extends Component {
 
         const { newSelectedUserIds, url, users } = this.state;
         if (newSelectedUserIds.length === 1) {
-            const request = await axios.delete(`${url}/user/delete/${newSelectedUserIds[0]}`);
+            const request = await axios.delete(`${url}user/delete/${newSelectedUserIds[0]}`);
             if (request.data) {
                 let updatedUsers = await users.filter(e => e._id !== newSelectedUserIds[0])
                 this.setState({
@@ -155,7 +155,7 @@ class Users extends Component {
             }
         } else {
 
-            const request = await axios.post(`${url}/user/deletemultiple`, newSelectedUserIds);
+            const request = await axios.post(`${url}user/deletemultiple`, newSelectedUserIds);
             if (request.data) {
                 const updatedUsers = users.filter(e => {
                     return !newSelectedUserIds.includes(e._id);
@@ -203,7 +203,7 @@ class Users extends Component {
             const fd = new FormData();
             fd.append('Dp', event.target.files[0]);
             fd.append('id', selectedUser._id)
-            const upload = await axios.post(`${this.state.url}/user/upload`, fd);
+            const upload = await axios.post(`${this.state.url}user/upload`, fd);
             if (upload.data.image) {
                 const updatedUsers = await users.map(e=>{
                     if(e._id===selectedUser._id){
@@ -233,7 +233,7 @@ class Users extends Component {
     updateUser = async (User) => {
 
         const { users, selectedUser, url } = this.state;
-        const request = await axios.put(`${url}/user/update/${User._id}`, {...User,Dp:undefined});
+        const request = await axios.put(`${url}user/update/${User._id}`, {...User,Dp:undefined});
         if (!request.data) {
             this.openSnackbar('error', 'This Email Address already exists!', true, false);
             return false;

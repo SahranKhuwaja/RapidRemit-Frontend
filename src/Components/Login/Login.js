@@ -8,7 +8,7 @@ class Login extends Component{
     constructor(props){
         super(props);
         this.state = {
-            Url:'http://localhost:3001/admin',
+            Url:'https://sahran-rapidremit.herokuapp.com/',
             Error:''
         }
     }
@@ -19,7 +19,7 @@ class Login extends Component{
 
     requestToServer = async({email,password})=>{
 
-        const request = await axios.post(`${this.state.Url}/login`,{email,password});
+        const request = await axios.post(`${this.state.Url}admin/login`,{email,password});
         if(request.data.user){
                 this.setState({
                 Error:''

@@ -16,7 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'http://localhost:3001',
+      url: 'https://sahran-rapidremit.herokuapp.com/',
       loggedInUser: {},
       Loading: true
     }
@@ -29,7 +29,7 @@ class App extends Component {
 
   isAuthenticated = async () => {
 
-    const request = await axios.get(`${this.state.url}/admin/profile/about`);
+    const request = await axios.get(`${this.state.url}admin/profile/about`);
     if (request.data.user) {
       this.setUserData(request.data.user);
     } else {
@@ -45,7 +45,7 @@ class App extends Component {
   }
 
   logout = async()=>{
-   const request = await axios.post(`${this.state.url}/admin/logout`);
+   const request = await axios.post(`${this.state.url}admin/logout`);
    if(request.data){
      this.setState({
        Loading:true

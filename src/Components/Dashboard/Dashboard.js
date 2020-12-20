@@ -12,7 +12,7 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'http://localhost:3001/',
+            url: 'https://sahran-rapidremit.herokuapp.com/',
             totalUsers:0,
             totalPartners:0,
             totalRates:0
